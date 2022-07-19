@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200;0,300;0,400;0,500;0,600;1,200;1,300;1,400;1,500&display=swap');
+body {
+    font-family: 'Karla', sans-serif;
+}
+.commonComponent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    width: 50vw;
+    height: 55vh;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin: 10px;
+}
+
+.commonComponent .title {
+    color: #46e1b5;
+    font-weight: bold;
+    display: block;
+    text-align: center;
+    font-size: 1.5vw;
+    font-family: 'Karla', sans-serif;
+    margin: 10px;
+}
+
+/*.commonItem{
+    display: flex;
+    background-color: #fff;
+    width: 80%;
+    text-align: center;
+    margin: 5px auto;
+    height: 30px;
+    font-family: 'Karla', sans-serif;
+    font-size: 15px;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 5px;
+}*/
+
+.doneItem {
+    display: flex;
+    background-color: #cecece;
+    width: 80%;
+    text-align: center;
+    margin: 5px auto;
+    height: 30px;
+    font-family: 'Karla', sans-serif;
+    font-size: 15px;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.addTaskBlock{
+    width: 18vw;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 16vw 1.1vw;
+    grid-gap: 0.7vw ;
+    grid-template-rows: auto;
+    grid-template-areas: "i a";
+}
+.textInput{
+    grid-area: i;
+    padding: 5px;
+    font-size: 1.1vw;
+    border: 1px solid #cecece;
+    border-radius: 3px;
+    height: 3vh;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.addTaskButton{
+    grid-area: a;
+    display: flex;
+    align-items: center;
+    background-color: #46e1b5;
+    justify-content: center;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 50%;
+    height: 2vh;
+    cursor: pointer;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
