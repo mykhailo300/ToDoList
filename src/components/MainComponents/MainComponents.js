@@ -62,7 +62,6 @@ const reducer = (state, action) => {
             return saveDataAfterDragging(action, state, "inProgress")
         }
         case ACTIONS.SET_DONE_ORDER: {
-            debugger
             return saveDataAfterDragging(action, state, "done")
         }
         default:
@@ -119,24 +118,22 @@ const MainComponents = () => {
             });
         }
     }
-
-    return <DragDropContext onDragEnd={onDragEnd}>
+    return (state.todos === null && state.inProgress === null && state.done === null) ? <div>Wait a minute</div> :
+     <DragDropContext onDragEnd={onDragEnd}>
         <div className={"app-wrapper-content"}>
             <ToDoContainer key={1}
-                           state={!state.todos ? [] : state.todos}
+                           state={state.todos === null ? [{task: "Example task, click the red button", id:"1"}]: state.todos}
                            dispatch={dispatch}
                            ACTIONS={ACTIONS}/>,
-            <InProgressContainer state={!state.inProgress ? [] : state.inProgress}
+            <InProgressContainer state={state.inProgress === null ? [{task: "in progress...", id:"1"}]: state.inProgress}
                                  key={2}
                                  dispatch={dispatch}
                                  ACTIONS={ACTIONS}/>
-            <DoneContainer state={!state.done ? [] : state.done}
+            <DoneContainer state={state.done === null ? [{task: "Done !", id:"1"}]: state.done}
                            key={3}
                            dispatch={dispatch}
                            ACTIONS={ACTIONS}/>
         </div>
-
-
     </DragDropContext>
 }
 
