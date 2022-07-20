@@ -118,8 +118,7 @@ const MainComponents = () => {
             });
         }
     }
-    return (state.todos === null && state.inProgress === null && state.done === null) ? <div>Wait a minute</div> :
-     <DragDropContext onDragEnd={onDragEnd}>
+    return<DragDropContext onDragEnd={onDragEnd}>
         <div className={"app-wrapper-content"}>
             <ToDoContainer key={1}
                            state={state.todos === null ? [{task: "Example task, click the red button", id:"1"}]: state.todos}
