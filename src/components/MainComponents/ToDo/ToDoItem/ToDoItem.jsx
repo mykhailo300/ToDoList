@@ -4,7 +4,7 @@ import PortalReactDOM from 'react-dom'
 import "./../../../../styles.css"
 import styled from "styled-components"
 import {Draggable} from "react-beautiful-dnd";
-const Container = styled.div`
+export const Container = styled.div`
   padding: 0;
 `;
 
@@ -40,13 +40,16 @@ const ToDoItem = (props) => {
         props.dispatch({
             type: "DONE_TASK",
             payload: {
+                task: props.task,
                 id: props.id,
+                index: props.index
             }
         })
     }
+
     return (
         <Draggable draggableId = {props.id} index = {props.index}
-                   disableInteractiveElementBlocking className = {"draggable"}>
+                   disableInteractiveElementBlocking className = {"draggable"} key = {props.id}>
             {(provided, snapshot) => {
                 const child = (<Container {...provided.draggableProps}
                            {...provided.dragHandleProps}

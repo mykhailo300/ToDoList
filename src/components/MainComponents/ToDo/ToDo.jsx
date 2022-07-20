@@ -1,8 +1,9 @@
 import AddTaskForm from "./AddTaskForm";
 import {Droppable} from "react-beautiful-dnd";
 import styled from "styled-components"
-const TaskList = styled.div`
-  padding: 0;
+export const TaskList = styled.div`
+  min-height: 15vh;
+  min-width: 18.9vw;
 `;
 
 const ToDo = (props) => {
@@ -11,7 +12,7 @@ const ToDo = (props) => {
             <div>
                 <span className={"title"}>To do</span>
                 <AddTaskForm dispatch={props.dispatch} ACTIONS={props.ACTIONS}/>
-                <Droppable droppableId={"todolist"}>
+                <Droppable droppableId={"todos"}>
                     {provided => (
                         <TaskList ref={provided.innerRef} {...provided.droppableProps}>
                             {props.todoItems}

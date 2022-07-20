@@ -1,13 +1,10 @@
 import ToDoItem from "./ToDoItem/ToDoItem";
 import ToDo from "./ToDo";
 
-const ToDoContainer = (props) => {
-    const todoItems = props.state.map((t, index) => {
-        if (!t.completed && !t.inProgress) {
-            return <ToDoItem id={t.id} key={t.id} task={t.task} complete={t.complete}
-                             dispatch={props.dispatch} index = {index}/>
-        }
-        return null
+const ToDoContainer = ({state, ...props}) => {
+    const todoItems = state.map((t, index) => {
+        return <ToDoItem id={t.id} key={t.id} task={t.task}
+                         dispatch={props.dispatch} index={index}/>
     })
     let onClearTodoItems = () => {
         props.dispatch({

@@ -1,4 +1,5 @@
 .doneItem{
+    margin: 0.3vw;
     width: 18vw;
     display: flex;
     align-items: center;

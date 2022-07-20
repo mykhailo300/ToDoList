@@ -1,6 +1,9 @@
 import {useEffect, useReducer} from 'react'
 import ToDoContainer from "./ToDo/ToDoContainer";
 import {DragDropContext} from "react-beautiful-dnd"
+import InProgressContainer from "./InProgress/InProgressContainer";
+import DoneContainer from "./Done/DoneContainer";
+import saveDataAfterDragging from "../../helpers/saveDataAfterDragging";
 
 
 const ACTIONS = {
@@ -9,7 +12,10 @@ const ACTIONS = {
     DONE_TASK: "DONE_TASK",
     DELETE_DONE_TASKS: "DELETE_DONE_TASKS",
     DELETE_INPROGRESS_TASKS: "DELETE_INPROGRESS_TASKS",
-    DELETE_TODO_TASKS: "DELETE_TODO_TASKS"
+    DELETE_TODO_TASKS: "DELETE_TODO_TASKS",
+    SET_TODO_ORDER: "SET_TODO_ORDER",
+    SET_INPROGRESS_ORDER: "SET_INPROGRESS_ORDER",
+    SET_DONE_ORDER: "SET_DONE_ORDER"
 }
 const initialState = {
     todos: JSON.parse(localStorage.getItem("state.todos")),
@@ -17,13 +23,13 @@ const initialState = {
     done: JSON.parse(localStorage.getItem("state.done")),
 }
 const reducer = (state, action) => {
+    const newTask = (task, id) => {
+        return {task: task, id: id}
+    }
     switch (action.type) {
         case ACTIONS.ADD_TASK:
-            let id = Date.now() + ""
-            let newTask = (task) => {
-                return {task: task, id: id, completed: false, inProgress: false}
-            }
-            return {...state, todos: [...state.todos, newTask(action.payload.task)]};
+            let id = Date.now() + "";
+            return {...state, todos: [...state.todos, newTask(action.payload.task, id)]};
         case ACTIONS.SET_TASK:
             return {
                 ...state, todos: state.todos.map((t) => {
@@ -35,27 +41,30 @@ const reducer = (state, action) => {
                 })
             }
         case ACTIONS.DONE_TASK:
-            return {
-                ...state, todos: state.todos.map((t) => {
-                    if (t.id === action.payload.id) {
-                        return {...t, completed: true}
-                    } else {
-                        return t;
-                    }
-                })
-            }
+            const removedItems = state.todos.splice(action.payload.index, 1);
+            return {...state, todos: state.todos.filter((t) => !(removedItems[0].id === t.id)) ,done: [...state.done, newTask(removedItems[0].task, Date.now() + "")]}
         case ACTIONS.DELETE_DONE_TASKS:
-            return {
-                ...state, todos: state.todos.filter((t) => !t.completed)
-            }
+           return {
+               ...state, done: []
+           }
         case ACTIONS.DELETE_TODO_TASKS:
             return {
-                ...state, todos: state.todos.filter((t) => t.completed || t.inProgress)
+                ...state, todos: []
             }
         case ACTIONS.DELETE_INPROGRESS_TASKS:
             return {
-                ...state, todos: state.todos.filter((t) => !t.inProgress)
+                ...state, inProgress: []
             }
+        case ACTIONS.SET_TODO_ORDER: {
+            return saveDataAfterDragging(action, state, "todos");
+        }
+        case ACTIONS.SET_INPROGRESS_ORDER: {
+            return saveDataAfterDragging(action, state, "inProgress")
+        }
+        case ACTIONS.SET_DONE_ORDER: {
+            debugger
+            return saveDataAfterDragging(action, state, "done")
+        }
         default:
             return state;
     }
@@ -69,8 +78,18 @@ const MainComponents = () => {
         localStorage.setItem("state.todos", JSON.stringify(state.todos));
     }, [state.todos]);
 
+    useEffect(() => {
+        // storing state
+        localStorage.setItem("state.inProgress", JSON.stringify(state.inProgress));
+    }, [state.inProgress]);
+
+    useEffect(() => {
+        // storing state
+        localStorage.setItem("state.done", JSON.stringify(state.done));
+    }, [state.done]);
+
     const onDragEnd = (result) => {
-        const {destination, source, draggableId} = result;
+        const {destination, source} = result;
 
         if (!destination) {
             return;
@@ -83,32 +102,39 @@ const MainComponents = () => {
             return;
         }
 
-        const toDoColumn = state.todos.filter(task => !task.completed && !task.inProgress);
-        const newTaskIds = toDoColumn.map(task => {
-            return task.id;
-        });
-        newTaskIds.splice(source.index, 1);
-        newTaskIds.splice(destination.index, 0, draggableId);
-
-
+        if (destination.droppableId === "todos") {
+            dispatch({
+                type: ACTIONS.SET_TODO_ORDER,
+                payload: result
+            });
+        } else if (destination.droppableId === "inProgress") {
+            dispatch({
+                type: ACTIONS.SET_INPROGRESS_ORDER,
+                payload: result
+            });
+        } else if (destination.droppableId === "done") {
+            dispatch({
+                type: ACTIONS.SET_DONE_ORDER,
+                payload: result
+            });
+        }
     }
 
-
-    return <DragDropContext className={"app-wrapper-content"} onDragEnd={onDragEnd}>
-        {[
-            <ToDoContainer key={Date.now()}
+    return <DragDropContext onDragEnd={onDragEnd}>
+        <div className={"app-wrapper-content"}>
+            <ToDoContainer key={1}
                            state={state.todos}
                            dispatch={dispatch}
                            ACTIONS={ACTIONS}/>,
-            /*<InProgressContainer state={state.todos}
-                                 key={Date.now()}
+            <InProgressContainer state={state.inProgress}
+                                 key={2}
                                  dispatch={dispatch}
-                                 ACTIONS={ACTIONS}/>,
-            <DoneContainer state={state.todos}
-                           key={Date.now()}
+                                 ACTIONS={ACTIONS}/>
+            <DoneContainer state={state.done}
+                           key={3}
                            dispatch={dispatch}
-                           ACTIONS={ACTIONS}/>*/
-        ]}
+                           ACTIONS={ACTIONS}/>
+        </div>
 
 
     </DragDropContext>
