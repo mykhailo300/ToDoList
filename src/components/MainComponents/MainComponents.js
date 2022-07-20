@@ -123,14 +123,14 @@ const MainComponents = () => {
     return <DragDropContext onDragEnd={onDragEnd}>
         <div className={"app-wrapper-content"}>
             <ToDoContainer key={1}
-                           state={state.todos}
+                           state={!state.todos ? [] : state.todos}
                            dispatch={dispatch}
                            ACTIONS={ACTIONS}/>,
-            <InProgressContainer state={state.inProgress}
+            <InProgressContainer state={!state.inProgress ? [] : state.inProgress}
                                  key={2}
                                  dispatch={dispatch}
                                  ACTIONS={ACTIONS}/>
-            <DoneContainer state={state.done}
+            <DoneContainer state={!state.done ? [] : state.done}
                            key={3}
                            dispatch={dispatch}
                            ACTIONS={ACTIONS}/>

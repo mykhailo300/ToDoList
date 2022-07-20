@@ -53,12 +53,12 @@ body {
 }
 
 .addTaskBlock{
-    margin: 0.3vw;
+    margin: 0.3vw 0 0.3vw 0.3vw;
     width: 18vw;
     display: grid;
     align-items: center;
     grid-template-columns: 16vw 1.1vw;
-    grid-gap: 0.9vw ;
+    grid-gap: 1vw ;
     grid-template-rows: auto;
     grid-template-areas: "i a";
 }

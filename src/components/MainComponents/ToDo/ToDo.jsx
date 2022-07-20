@@ -3,7 +3,7 @@ import {Droppable} from "react-beautiful-dnd";
 import styled from "styled-components"
 export const TaskList = styled.div`
   min-height: 15vh;
-  min-width: 18.9vw;
+  min-width: 19.5vw;
 `;
 
 const ToDo = (props) => {
