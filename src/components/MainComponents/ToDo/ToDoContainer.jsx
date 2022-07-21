@@ -1,8 +1,8 @@
 import ToDoItem from "./ToDoItem/ToDoItem";
 import ToDo from "./ToDo";
 
-const ToDoContainer = (props) => {
-    const todoItems = props.state.map((t, index) => {
+const ToDoContainer = ({state, ...props}) => {
+    const todoItems = state.map((t, index) => {
         return <ToDoItem id={t.id} key={t.id} task={t.task}
                          dispatch={props.dispatch} index={index}/>
     })
