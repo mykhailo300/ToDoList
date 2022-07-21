@@ -128,6 +128,10 @@ const MainComponents = () => {
             });
         }
     }
+    if(state.todos === null || state.inProgress === null || state.done === null) return <div>
+        <h1>I hope you will like my application!</h1>
+        <h2>Reload the page to continue</h2>
+    </div>
     return <DragDropContext onDragEnd={onDragEnd}>
         <div className={"app-wrapper-content"}>
             <ToDoContainer key={1}

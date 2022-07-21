@@ -15,8 +15,8 @@ body{
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-    height: 75vh;
-    width: 70vw;
+    height: 85vh;
+    width: 75vw;
     border-radius: 15px;
     background-size: cover;
     background-image: url("https://venngage-wordpress.s3.amazonaws.com/uploads/2018/09/Simple-Blue-White-Background-Image.jpg");
@@ -27,5 +27,5 @@ body{
 .app-wrapper-content {
     display: flex;
     width: 65vw;
-    height: 60vh;
+    height: 65vh;
 }
