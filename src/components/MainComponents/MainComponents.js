@@ -73,18 +73,28 @@ const MainComponents = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
 
     useEffect(() => {
-        // storing state
-        localStorage.setItem("state.todos", JSON.stringify(state.todos));
+        if(state.todos !==null) {
+            localStorage.setItem("state.todos", JSON.stringify(state.todos));
+        } else{
+            localStorage.setItem("state.todos", JSON.stringify([]));
+        }
     }, [state.todos]);
 
     useEffect(() => {
-        // storing state
-        localStorage.setItem("state.inProgress", JSON.stringify(state.inProgress));
+        if(state.inProgress !==null) {
+            localStorage.setItem("state.inProgress", JSON.stringify(state.inProgress));
+        } else{
+            localStorage.setItem("state.inProgress", JSON.stringify([]));
+        }
     }, [state.inProgress]);
 
     useEffect(() => {
         // storing state
-        localStorage.setItem("state.done", JSON.stringify(state.done));
+        if(state.done !==null) {
+            localStorage.setItem("state.done", JSON.stringify(state.done));
+        } else{
+            localStorage.setItem("state.done", JSON.stringify([]));
+        }
     }, [state.done]);
 
     const onDragEnd = (result) => {
@@ -121,14 +131,14 @@ const MainComponents = () => {
     return <DragDropContext onDragEnd={onDragEnd}>
         <div className={"app-wrapper-content"}>
             <ToDoContainer key={1}
-                           state={state.todos === null ? [{task: "Example task, click the red button", id:"1"}]: state.todos}
+                           state={state.todos}
                            dispatch={dispatch}
-                           ACTIONS={ACTIONS}/>,
-            <InProgressContainer state={state.inProgress === null ? [{task: "in progress...", id:"1"}]: state.inProgress}
+                           ACTIONS={ACTIONS}/>
+            <InProgressContainer state={state.inProgress}
                                  key={2}
                                  dispatch={dispatch}
                                  ACTIONS={ACTIONS}/>
-            <DoneContainer state={state.done === null ? [{task: "Done !", id:"1"}]: state.done}
+            <DoneContainer state={state.done}
                            key={3}
                            dispatch={dispatch}
                            ACTIONS={ACTIONS}/>

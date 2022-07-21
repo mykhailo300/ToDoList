@@ -1,7 +1,7 @@
 import InProgress from "./InProgress";
 import DoneItem from "../Done/DoneItem/DoneItem";
 
-const InProgressContainer = ({state , dispatch, ACTIONS}) => {
+const InProgressContainer = ({state, dispatch, ACTIONS}) => {
     const progressItems = state.map((t, index) => {
         return <DoneItem id={t.id} key={t.id} task={t.task}
                          dispatch={dispatch} index={index}/>
