@@ -1,7 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200;0,300;0,400;0,500;0,600;1,200;1,300;1,400;1,500&display=swap');
+
 body {
     font-family: 'Karla', sans-serif;
 }
+
 .commonComponent {
     display: flex;
     flex-direction: column;
@@ -9,7 +11,7 @@ body {
     background-color: #f2f2f2;
     border-radius: 10px;
     width: 65vw;
-    height: 60vh;
+    height: 63vh;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     margin: 10px;
 }
@@ -52,17 +54,18 @@ body {
     border-radius: 5px;
 }
 
-.addTaskBlock{
+.addTaskBlock {
     margin: 0.3vw 0 0.3vw 0.3vw;
     width: 18vw;
     display: grid;
     align-items: center;
     grid-template-columns: 16.7vw 1.1vw;
-    grid-gap: 1vw ;
+    grid-gap: 1vw;
     grid-template-rows: auto;
     grid-template-areas: "i a";
 }
-.textInput{
+
+.textInput {
     grid-area: i;
     padding: 5px;
     font-size: 1.1vw;
@@ -72,7 +75,7 @@ body {
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
-.addTaskButton{
+.addTaskButton {
     grid-area: a;
     display: flex;
     align-items: center;
@@ -87,3 +90,7 @@ body {
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
+.aroundTaskList {
+    height: 45vh;
+    width: 19.5vw;
+}

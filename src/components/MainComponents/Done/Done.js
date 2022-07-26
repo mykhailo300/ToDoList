@@ -1,6 +1,7 @@
 import "../../../styles.css"
 import {Droppable} from "react-beautiful-dnd";
 import {TaskList} from "../ToDo/ToDo";
+
 const Done = (props) => {
     return (
         <div className="commonComponent" style={{justifyContent: "space-between"}}>

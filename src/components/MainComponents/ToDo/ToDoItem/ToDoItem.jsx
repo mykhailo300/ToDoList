@@ -1,9 +1,10 @@
-import React, {useEffect, useState}  from "react";
+import React, {useEffect, useState} from "react";
 import s from "./ToDoItem.module.css"
 import PortalReactDOM from 'react-dom'
 import "./../../../../styles.css"
 import styled from "styled-components"
 import {Draggable} from "react-beautiful-dnd";
+
 export const Container = styled.div`
   padding: 0;
 `;
@@ -48,16 +49,17 @@ const ToDoItem = (props) => {
     }
 
     return (
-        <Draggable draggableId = {props.id} index = {props.index}
-                   disableInteractiveElementBlocking className = {"draggable"} key = {props.id}>
+        <Draggable draggableId={props.id} index={props.index} dragHandle
+                   disableInteractiveElementBlocking = {true} className={"draggable"} key={props.id}>
             {(provided, snapshot) => {
                 const child = (<Container {...provided.draggableProps}
-                           {...provided.dragHandleProps}
-                           ref={provided.innerRef}>
+                                          {...provided.dragHandleProps}
+                                          ref={provided.innerRef}>
                     {!editMode &&
-                        <div className = "addTaskBlock">
-                            <span onDoubleClick={activateEditMode} className = {s.toDoItem}>{props.task || ""}</span>
-                            <button className={"addTaskButton"} onClick={onDone}><></></button>
+                        <div className="addTaskBlock">
+                            <span onDoubleClick={activateEditMode} className={s.toDoItem}>{props.task || ""}</span>
+                            <button className={"addTaskButton"} onClick={onDone}><></>
+                            </button>
                         </div>}
                     {editMode &&
                         <div className={s.updateTaskBlock}>
@@ -68,8 +70,8 @@ const ToDoItem = (props) => {
                         </div>}
                 </Container>)
 
-                if(!snapshot.isDragging) return child;
-                
+                if (!snapshot.isDragging) return child;
+
                 return PortalReactDOM.createPortal(child, document.getElementById("root"));
             }}
         </Draggable>

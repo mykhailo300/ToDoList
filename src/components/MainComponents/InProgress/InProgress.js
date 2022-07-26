@@ -9,10 +9,10 @@ const InProgress = (props) => {
                 <span className={"title"}>In progress</span>
                 <Droppable droppableId={"inProgress"}>
                     {provided => (
-                        <TaskList ref={provided.innerRef} {...provided.droppableProps}>
-                            {props.progressItems}
-                            {provided.placeholder}
-                        </TaskList>
+                            <TaskList ref={provided.innerRef} {...provided.droppableProps}>
+                                {props.progressItems}
+                                {provided.placeholder}
+                            </TaskList>
                     )}
                 </Droppable>
             </div>

@@ -5,7 +5,7 @@ import Header from "./components/Header/Header";
 const App = () => {
     return (
         <div className="app-wrapper">
-            <div>
+            <div style={{margin: "1.7vw"}}>
                 <Header/>
             </div>
             <MainComponents/>

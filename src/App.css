@@ -7,7 +7,6 @@ body{
 .app-wrapper {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
     align-items: center;
     margin: 0;
     position: absolute;
@@ -28,4 +27,9 @@ body{
     display: flex;
     width: 65vw;
     height: 65vh;
+    margin: 2vw;
+}
+
+::-webkit-scrollbar {
+    display: none;
 }
