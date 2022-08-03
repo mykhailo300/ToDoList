@@ -5,6 +5,7 @@ import InProgressContainer from "./InProgress/InProgressContainer";
 import DoneContainer from "./Done/DoneContainer";
 import saveDataAfterDragging from "../../helpers/saveDataAfterDragging";
 import deleteItemAfterDragging from "../../helpers/deleteItemAfterDragging";
+import localStorageHelper from "../../helpers/localStorageHelper";
 
 
 const ACTIONS = {
@@ -78,33 +79,20 @@ const MainComponents = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
 
     useEffect(() => {
-        if(state.todos !==null) {
-            localStorage.setItem("state.todos", JSON.stringify(state.todos));
-        } else{
-            localStorage.setItem("state.todos", JSON.stringify([]));
-        }
+        localStorageHelper(state,'todos')
     }, [state.todos]);
 
     useEffect(() => {
-        if(state.inProgress !==null) {
-            localStorage.setItem("state.inProgress", JSON.stringify(state.inProgress));
-        } else{
-            localStorage.setItem("state.inProgress", JSON.stringify([]));
-        }
+        localStorageHelper(state,'inProgress')
     }, [state.inProgress]);
 
     useEffect(() => {
         // storing state
-        if(state.done !==null) {
-            localStorage.setItem("state.done", JSON.stringify(state.done));
-        } else{
-            localStorage.setItem("state.done", JSON.stringify([]));
-        }
+        localStorageHelper(state,'done')
     }, [state.done]);
 
     const onDragEnd = (result) => {
         const {destination, source} = result;
-        debugger;
         if (!destination) {
             return;
         }
