@@ -4,6 +4,7 @@ import {DragDropContext} from "react-beautiful-dnd"
 import InProgressContainer from "./InProgress/InProgressContainer";
 import DoneContainer from "./Done/DoneContainer";
 import saveDataAfterDragging from "../../helpers/saveDataAfterDragging";
+import deleteItemAfterDragging from "../../helpers/deleteItemAfterDragging";
 
 
 const ACTIONS = {
@@ -15,7 +16,8 @@ const ACTIONS = {
     DELETE_TODO_TASKS: "DELETE_TODO_TASKS",
     SET_TODO_ORDER: "SET_TODO_ORDER",
     SET_INPROGRESS_ORDER: "SET_INPROGRESS_ORDER",
-    SET_DONE_ORDER: "SET_DONE_ORDER"
+    SET_DONE_ORDER: "SET_DONE_ORDER",
+    DELETE_TASK_AFTER_DRAGGING: "DELETE_TASK_AFTER_DRAGGING"
 }
 const initialState = {
     todos: JSON.parse(localStorage.getItem("state.todos")),
@@ -64,6 +66,9 @@ const reducer = (state, action) => {
         case ACTIONS.SET_DONE_ORDER: {
             return saveDataAfterDragging(action, state, "done")
         }
+        case ACTIONS.DELETE_TASK_AFTER_DRAGGING: {
+            return deleteItemAfterDragging(action, state)
+        }
         default:
             return state;
     }
@@ -99,7 +104,7 @@ const MainComponents = () => {
 
     const onDragEnd = (result) => {
         const {destination, source} = result;
-
+        debugger;
         if (!destination) {
             return;
         }
@@ -126,9 +131,14 @@ const MainComponents = () => {
                 type: ACTIONS.SET_DONE_ORDER,
                 payload: result
             });
+        } else if (destination.droppableId === "delete") {
+            dispatch({
+                type: ACTIONS.DELETE_TASK_AFTER_DRAGGING,
+                payload: result
+            });
         }
     }
-    if(state.todos === null || state.inProgress === null || state.done === null) return <div>
+    if(state.todos === null || state.inProgress === null || state.done === null) return <div style={{textAlign: "center"}}>
         <h1>I hope you will like my application!</h1>
         <h2>Reload the page to continue</h2>
     </div>

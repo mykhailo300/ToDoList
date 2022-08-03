@@ -1,4 +1,3 @@
-import React, {useEffect, useState} from "react";
 import s from "./ToDoItem.module.css"
 import PortalReactDOM from 'react-dom'
 import "./../../../../styles.css"
@@ -10,7 +9,7 @@ export const Container = styled.div`
 `;
 
 const ToDoItem = (props) => {
-
+/*
     let [editMode, setEditMode] = useState(false);
     let [toDoTask, setToDoTask] = useState(props.task);
 
@@ -36,7 +35,7 @@ const ToDoItem = (props) => {
     let onChangeTask = (e) => {
         setToDoTask(e.currentTarget.value);
     }
-
+*/
     let onDone = () => {
         props.dispatch({
             type: "DONE_TASK",
@@ -50,24 +49,25 @@ const ToDoItem = (props) => {
 
     return (
         <Draggable draggableId={props.id} index={props.index} dragHandle
-                   disableInteractiveElementBlocking = {true} className={"draggable"} key={props.id}>
+                   disableInteractiveElementBlocking className={"draggable"} key={props.id}>
             {(provided, snapshot) => {
                 const child = (<Container {...provided.draggableProps}
                                           {...provided.dragHandleProps}
                                           ref={provided.innerRef}>
-                    {!editMode &&
+                    {/*{!editMode &&*/}
                         <div className="addTaskBlock">
-                            <span onDoubleClick={activateEditMode} className={s.toDoItem}>{props.task || ""}</span>
+                            <span className={s.toDoItem}>{props.task || ""}</span>
                             <button className={"addTaskButton"} onClick={onDone}><></>
                             </button>
-                        </div>}
-                    {editMode &&
+                        </div>
+                    {/*{editMode &&
                         <div className={s.updateTaskBlock}>
                             <input onChange={onChangeTask}
                                    autoFocus={true} onDoubleClick={deActivateEditMode} value={[toDoTask]} type="text"
                                    className={s.updateTaskInput} onBlur={deActivateEditMode}
+                                   onMouseDown={(e) => e.preventDefault()} onMouseUp={(e) => e.preventDefault()}
                             />
-                        </div>}
+                        </div>}*/}
                 </Container>)
 
                 if (!snapshot.isDragging) return child;

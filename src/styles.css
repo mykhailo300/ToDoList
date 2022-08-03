@@ -94,3 +94,15 @@ body {
     height: 45vh;
     width: 19.5vw;
 }
+.deleteTaskArea{
+    cursor: pointer;
+    margin: 5px;
+    border-radius: 4px;
+    width: 19.5vw;
+    height: 5vh;
+}
+.deleteTaskArea:hover{
+    cursor: pointer;
+    background-color: lightcoral;
+}
+

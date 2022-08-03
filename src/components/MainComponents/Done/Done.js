@@ -1,6 +1,7 @@
 import "../../../styles.css"
 import {Droppable} from "react-beautiful-dnd";
 import {TaskList} from "../ToDo/ToDo";
+import DeleteFooter from "../helperComponents/DeleteFooter";
 
 const Done = (props) => {
     return (
@@ -16,8 +17,7 @@ const Done = (props) => {
                     )}
                 </Droppable>
             </div>
-            <button onClick={props.onClearDoneItems} className={"addTaskButton"}
-                    style={{backgroundColor: "red", width: "1.1vw", marginBottom: "2.5vh"}}></button>
+            <DeleteFooter deleteFunction = {props.onClearDoneItems}/>
         </div>
     )
 }
